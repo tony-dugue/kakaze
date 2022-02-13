@@ -33,7 +33,8 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     position: 'absolute',
-    top: 70
+    top: 70,
+    alignItems: 'center'
   },
   registerButton: {
     width: '100%',
