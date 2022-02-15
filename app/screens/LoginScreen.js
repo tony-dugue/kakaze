@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import Screen from '../components/Screen'
 import AppButton from "../components/AppButton";
 import AppFormField from "../components/AppFormField";
+import SubmitButton from "../components/SubmitButton";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("L'email est obligatoire").email("email invalide").label('Email'),
@@ -46,7 +47,7 @@ function LoginScreen() {
               textContentType="password" // IOS only
             />
 
-            <AppButton title="Login" onPress={handleSubmit} />
+            <SubmitButton title="Login" />
           </>
         )}
 
