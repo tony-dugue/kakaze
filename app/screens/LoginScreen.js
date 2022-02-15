@@ -4,10 +4,8 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 
 import Screen from '../components/Screen'
-import AppTextInput from "../components/AppTextInput";
-import AppText from '../components/AppText'
 import AppButton from "../components/AppButton";
-import ErrorMessage from '../components/ErrorMessage'
+import AppFormField from "../components/AppFormField";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("L'email est obligatoire").email("email invalide").label('Email'),
@@ -26,39 +24,27 @@ function LoginScreen() {
         onSubmit={values => console.log(values)}
         validationSchema={validationSchema}
       >
-        { ({
-             handleChange,
-             handleSubmit,
-             errors,
-             setFieldTouched,
-             touched
-        }) => (
+        { ({ handleSubmit }) => (
           <>
-            <AppTextInput
+            <AppFormField
               autoCapitalize="none"
               autoCorrect={false}
               icon="email"
               keyboardType="email-address"
-              onBlur={ () => setFieldTouched("email")}
-              onChangeText={handleChange('email')}
+              name="email"
               placeholder="Email"
               textContentType="emailAddress" // IOS only
             />
 
-            <ErrorMessage error={errors.email} visible={touched.email} />
-
-            <AppTextInput
+            <AppFormField
               autoCapitalize="none"
               autoCorrect={false}
               icon="lock"
-              onBlur={ () => setFieldTouched("password")}
-              onChangeText={handleChange('password')}
+              name="password"
               placeholder="Mot de passe"
               secureTextEntry
               textContentType="password" // IOS only
             />
-
-            <ErrorMessage error={errors.password} />
 
             <AppButton title="Login" onPress={handleSubmit} />
           </>
