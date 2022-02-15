@@ -1,6 +1,6 @@
 import React from 'react';
 import { ImageBackground, StyleSheet, View, Image, Text } from 'react-native'
-import AppButton from "../components/AppButton";
+import Button from "../components/Button";
 
 function WelcomeScreen() {
   return (
@@ -16,8 +16,8 @@ function WelcomeScreen() {
       </View>
 
       <View style={styles.buttonsContainer}>
-        <AppButton title="Se connecter" />
-        <AppButton title="Créer un compte" color="secondary" />
+        <Button title="Se connecter" />
+        <Button title="Créer un compte" color="secondary" />
       </View>
 
     </ImageBackground>
