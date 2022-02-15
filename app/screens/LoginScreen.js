@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Image} from 'react-native'
-import { Formik } from 'formik'
 import * as Yup from 'yup'
 
 import Screen from '../components/Screen'
-import AppButton from "../components/AppButton";
 import AppFormField from "../components/AppFormField";
 import SubmitButton from "../components/SubmitButton";
+import AppForm from "../components/AppForm";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required("L'email est obligatoire").email("email invalide").label('Email'),
@@ -20,38 +19,34 @@ function LoginScreen() {
 
       <Image style={styles.logo} source={require('../assets/logo-red.png')} />
 
-      <Formik
+      <AppForm
         initialValues={{ email: '', password: '' }}
         onSubmit={values => console.log(values)}
         validationSchema={validationSchema}
       >
-        { ({ handleSubmit }) => (
-          <>
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="email"
-              keyboardType="email-address"
-              name="email"
-              placeholder="Email"
-              textContentType="emailAddress" // IOS only
-            />
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="email"
+          keyboardType="email-address"
+          name="email"
+          placeholder="Email"
+          textContentType="emailAddress" // IOS only
+        />
 
-            <AppFormField
-              autoCapitalize="none"
-              autoCorrect={false}
-              icon="lock"
-              name="password"
-              placeholder="Mot de passe"
-              secureTextEntry
-              textContentType="password" // IOS only
-            />
+        <AppFormField
+          autoCapitalize="none"
+          autoCorrect={false}
+          icon="lock"
+          name="password"
+          placeholder="Mot de passe"
+          secureTextEntry
+          textContentType="password" // IOS only
+        />
 
-            <SubmitButton title="Login" />
-          </>
-        )}
+        <SubmitButton title="Login" />
 
-      </Formik>
+      </AppForm>
     </Screen>
   );
 }
