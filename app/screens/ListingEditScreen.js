@@ -30,9 +30,9 @@ function ListingEditScreen() {
       >
         <FormField name="title" placeholder="Titre" maxLength={255} />
 
-        <FormField name="price" placeholder="Prix" keyboardType="numeric" maxLength={8} />
+        <FormField name="price" placeholder="Prix" keyboardType="numeric" maxLength={8} width={120} />
 
-        <Picker name="category" placeholder="Catégorie" items={categories} />
+        <Picker name="category" placeholder="Catégorie" items={categories} width={'50%'} />
 
         <FormField name="description" placeholder="Description" maxLength={255} multiline numberOfLines={3} />
 
