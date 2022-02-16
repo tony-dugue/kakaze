@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react'
 import {View, StyleSheet, Image, TouchableWithoutFeedback, Alert} from 'react-native'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
-import * as Permissions from 'expo-permissions'
 import * as ImagePicker from "expo-image-picker"
 
 import colors from "../config/colors";
@@ -11,7 +10,7 @@ function ImageInput({ imageUri, onChangeImage }) {
   // demande de permission à l'utilisateur pour accéder à l'album photo et au GPS
   const requestPermission = async () => {
 
-    const { granted } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY, Permissions.LOCATION_FOREGROUND)
+    const { granted } = await ImagePicker.requestMediaLibraryPermissionsAsync()
 
     if (!granted) alert('Kakaze est une application qui utilise l\'album photo ! 😜 ' +
       'Pour continuer, nous avons besoin d\'avoir un accès à l\'album photo' )
