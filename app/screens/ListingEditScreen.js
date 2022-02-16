@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet } from 'react-native'
 import * as Yup from 'yup'
+import * as Location from 'expo-location'
 
 import Screen from '../components/Screen'
 
@@ -29,12 +30,27 @@ const categories = [
 ]
 
 function ListingEditScreen() {
+
+  const [location, setLocation] = useState()
+
+  const getLocation = async () => {
+    const { granted } = await Location.requestForegroundPermissionsAsync()
+    if (!granted) return
+
+    const {coords: { latitude, longitude }} = await Location.getLastKnownPositionAsync()
+    setLocation({ latitude, longitude })
+  }
+
+  useEffect( () => {
+    getLocation()
+  }, [])
+
   return (
     <Screen style={styles.container}>
 
       <Form
         initialValues={{ title: '', price: '', description: '', category: null, images: [] }}
-        onSubmit={values => console.log(values)}
+        onSubmit={ () => console.log(location)}
         validationSchema={validationSchema}
       >
 
