@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect} from 'react'
 import {View, StyleSheet, Image, TouchableWithoutFeedback, Alert} from 'react-native'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import * as Permissions from 'expo-permissions'
-import * as ImagePicker from "expo-image-picker";
+import * as ImagePicker from "expo-image-picker"
 
 import colors from "../config/colors";
 

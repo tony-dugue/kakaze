@@ -4,7 +4,7 @@ import * as Yup from 'yup'
 
 import Screen from '../components/Screen'
 
-import { AppForm, AppFormField, SubmitButton } from '../components/forms'
+import { Form, FormField, SubmitButton } from '../components/forms'
 
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Le nom est obligatoire").label('Nom'),
@@ -19,19 +19,19 @@ function RegisterScreen() {
 
       <Image style={styles.logo} source={require('../assets/logo-red.png')} />
 
-      <AppForm
+      <Form
         initialValues={{ name: '', email: '', password: '' }}
         onSubmit={values => console.log(values)}
         validationSchema={validationSchema}
       >
-        <AppFormField
+        <FormField
           autoCorrect={false}
           icon="account"
           name="name"
           placeholder="Nom"
         />
 
-        <AppFormField
+        <FormField
           autoCapitalize="none"
           autoCorrect={false}
           icon="email"
@@ -41,7 +41,7 @@ function RegisterScreen() {
           textContentType="emailAddress" // IOS only
         />
 
-        <AppFormField
+        <FormField
           autoCapitalize="none"
           autoCorrect={false}
           icon="lock"
@@ -53,7 +53,7 @@ function RegisterScreen() {
 
         <SubmitButton title="Login" />
 
-      </AppForm>
+      </Form>
     </Screen>
   );
 }
