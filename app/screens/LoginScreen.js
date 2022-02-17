@@ -43,7 +43,7 @@ function LoginScreen() {
           textContentType="password" // IOS only
         />
 
-        <SubmitButton title="Login" />
+        <SubmitButton title="Se connecter" />
 
       </Form>
     </Screen>

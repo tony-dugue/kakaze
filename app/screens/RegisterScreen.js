@@ -51,7 +51,7 @@ function RegisterScreen() {
           textContentType="password" // IOS only
         />
 
-        <SubmitButton title="Login" />
+        <SubmitButton title="Créer le compte" />
 
       </Form>
     </Screen>

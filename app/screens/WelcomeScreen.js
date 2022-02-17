@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageBackground, StyleSheet, View, Image, Text } from 'react-native'
 import Button from "../components/Button";
 
-function WelcomeScreen() {
+function WelcomeScreen({ navigation }) {
   return (
     <ImageBackground
       blurRadius={10}
@@ -16,8 +16,8 @@ function WelcomeScreen() {
       </View>
 
       <View style={styles.buttonsContainer}>
-        <Button title="Se connecter" />
-        <Button title="Créer un compte" color="secondary" />
+        <Button title="Se connecter" onPress={ () => navigation.navigate("Connexion")} />
+        <Button title="Créer un compte" color="secondary" onPress={ () => navigation.navigate("Inscription")} />
       </View>
 
     </ImageBackground>
