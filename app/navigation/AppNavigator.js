@@ -13,7 +13,7 @@ const AppNavigator = () => {
   return (
     <Tab.Navigator>
 
-      <Tab.Screen name="Information" component={FeedNavigator}
+      <Tab.Screen name="Annonces" component={FeedNavigator}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size}) =>
@@ -29,7 +29,7 @@ const AppNavigator = () => {
         })}
       />
 
-      <Tab.Screen name="Compte" component={AccountNavigator}
+      <Tab.Screen name="Compte utilisateur" component={AccountNavigator}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size}) =>
