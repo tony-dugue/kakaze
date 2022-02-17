@@ -9,6 +9,7 @@ import routes from '../navigation/routes'
 import listingsApi from '../api/listings'
 import AppText from "../components/Text";
 import Button from "../components/Button";
+import ActivityIndicator from '../components/ActivityIndicator'
 
 /*
 const listings = [
@@ -21,10 +22,12 @@ function ListingsScreen({ navigation }) {
 
   const [listings, setListings] = useState([])
   const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const loadListings = async () => {
+    setLoading(true)
     const response = await listingsApi.getListings()
-    console.log(response.data)
+    setLoading(false)
     if (!response.ok) return setError(true)
     setError(false)
     setListings(response.data)
@@ -43,6 +46,8 @@ function ListingsScreen({ navigation }) {
         </>
       }
 
+      {/*<ActivityIndicator visible={true} />*/}
+
       <FlatList
         data={listings}
         keyExtractor={listing => listing.id.toString()}
@@ -54,6 +59,7 @@ function ListingsScreen({ navigation }) {
             onPress={ () => navigation.navigate(routes.LISTING_DETAILS, item)}
           />}
       />
+
     </Screen>
   );
 }
