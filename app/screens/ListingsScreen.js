@@ -11,13 +11,19 @@ const listings = [
   { id: 2, title: 'Canapé en très bon état', price: 1000, image: require('../assets/couch.jpg')}
 ]
 
-function ListingsScreen() {
+function ListingsScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
       <FlatList
         data={listings}
         keyExtractor={listing => listing.id.toString()}
-        renderItem={ ({ item}) => <Card title={item.title} subTitle={item.price + "€"} image={item.image} />}
+        renderItem={ ({ item }) =>
+          <Card
+            title={item.title}
+            subTitle={item.price + "€"}
+            image={item.image}
+            onPress={ () => navigation.navigate("Annonce", item)}
+          />}
       />
     </Screen>
   );
