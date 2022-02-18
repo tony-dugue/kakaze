@@ -1,10 +1,10 @@
-import React from 'react';
-import {createStackNavigator} from "@react-navigation/stack";
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import ListingsScreen from "../screens/ListingsScreen";
 import ListingDetailsScreen from "../screens/ListingDetailsScreen";
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator();
 
 const FeedNavigator = () => {
   return (
@@ -12,8 +12,7 @@ const FeedNavigator = () => {
       <Stack.Screen name="Informations" component={ListingsScreen} />
       <Stack.Screen name="Annonce" component={ListingDetailsScreen} />
     </Stack.Navigator>
-  )
-}
+  );
+};
 
 export default FeedNavigator;
-

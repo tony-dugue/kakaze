@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet } from 'react-native'
 import * as Yup from 'yup'
 
@@ -10,6 +10,7 @@ import FormImagePicker from "../components/FormImagePicker";
 import listingsApi from '../api/listings'
 
 import useLocation from "../hooks/useLocation";
+import UploadScreen from "./UploadScreen";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required("Le titre est obligatoire").min(1, "trop court").label('Titre'),
@@ -35,14 +36,26 @@ function ListingEditScreen() {
 
   const location = useLocation()
 
-  const handleSubmit = async (listing) => {
-    const result = await listingsApi.addListing({...listing, location}, progress => console.log(progress))
-    if (!result.ok) return alert('L\'enregistrement de l\'annonce a échoué')
-    alert('Success')
+  const [uploadVisible, setUploadVisible] = useState(false)
+  const [progress, setProgress] = useState(0)
+
+  const handleSubmit = async (listing, { resetForm }) => {
+    setProgress(0)
+    setUploadVisible(true)
+    const result = await listingsApi.addListing({...listing, location}, progress => setProgress(progress))
+
+    if (!result.ok) {
+      setUploadVisible(false)
+      return alert('L\'enregistrement de l\'annonce a échoué')
+    }
+
+    resetForm()
   }
 
   return (
     <Screen style={styles.container}>
+
+      <UploadScreen onDone={ () => setUploadVisible(false)} progress={progress} visible={uploadVisible} />
 
       <Form
         initialValues={{ title: '', price: '', description: '', category: null, images: [] }}
