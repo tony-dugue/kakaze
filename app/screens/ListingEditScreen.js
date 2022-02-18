@@ -36,7 +36,7 @@ function ListingEditScreen() {
   const location = useLocation()
 
   const handleSubmit = async (listing) => {
-    const result = await listingsApi.addListing({...listing, location})
+    const result = await listingsApi.addListing({...listing, location}, progress => console.log(progress))
     if (!result.ok) return alert('L\'enregistrement de l\'annonce a échoué')
     alert('Success')
   }
