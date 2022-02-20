@@ -10,8 +10,6 @@ import listingsApi from "../api/listings";
 import ActivityIndicator from "../components/ActivityIndicator";
 import Screen from "../components/Screen";
 import Card from "../components/Card";
-import AppText from "../components/Text";
-import Button from "../components/Button";
 
 function ListingsScreen({ navigation }) {
   const getListingsApi = useApi(listingsApi.getListings);
@@ -40,6 +38,7 @@ function ListingsScreen({ navigation }) {
             title={item.title}
             subTitle={item.price + "€"}
             imageUrl={item.images[0].url}
+            thumbnailUrl={item.images[0].thumbnailUrl}
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
