@@ -6,9 +6,16 @@ const expiryInMinutes = 5
 
 // Stockage d'une valeur dans le AsyncStorage
 const store = async (key, value) => {
+
+  const item = { value, timestamp: Date.now()}
+
   try {
-    const item = { value, timestamp: new Date}
     await AsyncStorage.setItem(prefix + key, JSON.stringify(item))
+
+    // DEBUG (voir le contenu du cache après avoir ajouter une entrée
+    //const value = await AsyncStorage.getItem(prefix + key)
+    //console.log('mycache:', JSON.parse(value))
+
   } catch (error) {
     console.log(error)
   }
@@ -23,9 +30,10 @@ const isExpired = item => {
 
 // Récupération d'une valeur dans le AsyncStorage
 const get = async (key) => {
+
   try {
-    const value = AsyncStorage.getItem(prefix + key)
-    const item = JSON.parse(value)
+    const value = await AsyncStorage.getItem(prefix + key)
+    const item = await JSON.parse(value)
 
     // si l'item n'existe pas
     if (!item) return null
