@@ -22,12 +22,13 @@ function ListingsScreen({ navigation }) {
 
   return (
     <Screen style={styles.screen}>
-      {getListingsApi.error && (
+
+      {/*getListingsApi.error && (
         <>
           <AppText>Le chargement des annonces a échouées !</AppText>
           <Button title="Réessayer" onPress={loadListings} />
         </>
-      )}
+      )*/}
 
       <ActivityIndicator visible={getListingsApi.loading} />
 
