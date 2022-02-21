@@ -29,7 +29,7 @@ const AppNavigator = () => {
         })}
       />
 
-      <Tab.Screen name="Compte utilisateur" component={AccountNavigator}
+      <Tab.Screen name="Profil" component={AccountNavigator}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size}) =>

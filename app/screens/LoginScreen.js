@@ -3,6 +3,7 @@ import {StyleSheet, Image} from 'react-native'
 import * as Yup from 'yup'
 import authApi from '../api/auth'
 import jwtDecode from 'jwt-decode'
+import authStorage from '../auth/storage'
 
 // Context
 import AuthContext from "../auth/context";
@@ -26,6 +27,7 @@ function LoginScreen() {
     if (!result.ok) return setLoginFailed(true)
     const user = jwtDecode(result.data)
     authContext.setUser(user)
+    await authStorage.storeToken(result.data)
   }
 
   return (
