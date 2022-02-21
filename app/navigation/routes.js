@@ -3,6 +3,5 @@ export default Object.freeze({
   LISTING_EDIT: "Créer une annonce",
   LOGIN: "Connexion",
   MESSAGES: "Messages",
-  REGISTER: "Inscription"
-})
-
+  REGISTER: "Inscription",
+});

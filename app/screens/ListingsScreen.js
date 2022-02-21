@@ -20,7 +20,6 @@ function ListingsScreen({ navigation }) {
 
   return (
     <Screen style={styles.screen}>
-
       {/*getListingsApi.error && (
         <>
           <AppText>Le chargement des annonces a échouées !</AppText>
