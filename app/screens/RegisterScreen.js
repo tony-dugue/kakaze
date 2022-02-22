@@ -2,11 +2,13 @@ import React, {useState} from 'react';
 import {StyleSheet, Image} from 'react-native'
 import * as Yup from 'yup'
 
-import userApi from '../api/users'
+import usersApi from '../api/users'
 import authApi from '../api/auth'
 import useAuth from "../auth/useAuth";
+import useApi from "../hooks/useApi";
 
 import Screen from '../components/Screen'
+import ActivityIndicator from '../components/ActivityIndicator'
 
 import { ErrorMessage, Form, FormField, SubmitButton } from '../components/forms'
 
@@ -18,11 +20,14 @@ const validationSchema = Yup.object().shape({
 
 function RegisterScreen() {
 
+  const registerApi = useApi(usersApi.register)
+  const loginApi = useApi(authApi.login)
+
   const auth = useAuth()
   const [error, setError] = useState()
 
   const handleSubmit = async (userInfo) => {
-    const result = await userApi.register(userInfo)
+    const result = await registerApi.request(userInfo)
 
     if (!result.ok) {
       if (result.data) setError(result.data.error)
@@ -33,7 +38,7 @@ function RegisterScreen() {
       return
     }
 
-     const { data: authToken} = await authApi.login(
+     const { data: authToken} = await loginApi.request(
        userInfo.email,
        userInfo.password
      )
@@ -41,49 +46,53 @@ function RegisterScreen() {
   }
 
   return (
-    <Screen style={styles.container}>
+    <>
+      <ActivityIndicator visible={registerApi.loading || loginApi.loading}/>
 
-      <Image style={styles.logo} source={require('../assets/logo-red.png')} />
+      <Screen style={styles.container}>
 
-      <Form
-        initialValues={{ name: '', email: '', password: '' }}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
-      >
+        <Image style={styles.logo} source={require('../assets/logo-red.png')} />
 
-        <ErrorMessage error={error} visible={error} />
+        <Form
+          initialValues={{ name: '', email: '', password: '' }}
+          onSubmit={handleSubmit}
+          validationSchema={validationSchema}
+        >
 
-        <FormField
-          autoCorrect={false}
-          icon="account"
-          name="name"
-          placeholder="Nom"
-        />
+          <ErrorMessage error={error} visible={error} />
 
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="email"
-          keyboardType="email-address"
-          name="email"
-          placeholder="Email"
-          textContentType="emailAddress" // IOS only
-        />
+          <FormField
+            autoCorrect={false}
+            icon="account"
+            name="name"
+            placeholder="Nom"
+          />
 
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="lock"
-          name="password"
-          placeholder="Mot de passe"
-          secureTextEntry
-          textContentType="password" // IOS only
-        />
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="email"
+            keyboardType="email-address"
+            name="email"
+            placeholder="Email"
+            textContentType="emailAddress" // IOS only
+          />
 
-        <SubmitButton title="Créer le compte" />
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            icon="lock"
+            name="password"
+            placeholder="Mot de passe"
+            secureTextEntry
+            textContentType="password" // IOS only
+          />
 
-      </Form>
-    </Screen>
+          <SubmitButton title="Créer le compte" />
+
+        </Form>
+      </Screen>
+    </>
   );
 }
 
